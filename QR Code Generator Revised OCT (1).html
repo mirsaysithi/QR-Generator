@@ -25,19 +25,19 @@
 
     <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
     <script>
-        var qrcode = null; // Declare a global variable to store the QR code instance
+        var qrcode = null; 
 
         function generateQRCode() {
             var upcBarcode = document.getElementById("upcBarcode").value;
             var lotNumber = document.getElementById("lotNumber").value;
             var expirationDate = document.getElementById("expirationDate").value;
 
-            // Generate GS1 QR code with the input data and serial number
+            // Generate GS1 QR code with the input data
             var gs1QRCode = "0100" + upcBarcode +
                             "10" + lotNumber +
                             "~17" + expirationDate;
 
-            // Remove existing QR code element
+            // Removes existing QR code element when new QR is generated
             var qrcodeElement = document.getElementById("qrcode");
             while (qrcodeElement.firstChild) {
                 qrcodeElement.removeChild(qrcodeElement.firstChild);
