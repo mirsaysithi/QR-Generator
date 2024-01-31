@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GS1 QR Code Generator</title>
+</head>
+<body>
+    <div class="container">
+        <h2>GS1 QR Code Generator</h2>
+        <div class="form-group">
+            <label for="upcBarcode">UPC Barcode (scan barcode):</label>
+            <input type="text" id="upcBarcode">
+        </div>
+        <div class="form-group">
+            <label for="lotNumber">Lot Number:</label>
+            <input type="text" id="lotNumber">
+        </div>
+        <div class="form-group">
+            <label for="expirationDate">Expiration Date (YYYYMMDD):</label>
+            <input type="text" id="expirationDate">
+        </div>
+        <button class="btn" onclick="generateQRCode()">Generate QR Code</button>
+        <div class="qrcode-img"><div id="qrcode"></div><span id="qrcodeText"></span>
+        </div>
+    </div>
+
+    <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+    <script>
+        var qrcode = null; // Declare a global variable to store the QR code instance
+
+        function generateQRCode() {
+            var upcBarcode = document.getElementById("upcBarcode").value;
+            var lotNumber = document.getElementById("lotNumber").value;
+            var expirationDate = document.getElementById("expirationDate").value;
+
+            // Generate GS1 QR code with the input data and serial number
+            var gs1QRCode = "0100" + upcBarcode +
+                            "10" + lotNumber +
+                            "~17" + expirationDate;
+
+            // Remove existing QR code element
+            var qrcodeElement = document.getElementById("qrcode");
+            while (qrcodeElement.firstChild) {
+                qrcodeElement.removeChild(qrcodeElement.firstChild);
+            }
+
+            // Generate QR code using qrcode.js library
+            qrcode = new QRCode(qrcodeElement, {
+                text: gs1QRCode,
+                width: 128,
+                height: 128
+            });
+
+ 
+            var qrcodeText = document.getElementById("qrcodeText");
+            qrcodeText.innerText = "UPC Barcode: " + upcBarcode + "\nLot Number: " + lotNumber + "\nExpiration Date: " + expirationDate;
+        }
+    </script>
+</body>
+</html>
