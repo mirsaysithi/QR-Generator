@@ -7,7 +7,7 @@
     <div class="container">
         <h2>LOT/EXP QR Generator</h2>
         <div class="form-group">
-            <label for="upcBarcode">UPC Barcode (scan barcode, numeric and up to 12 digits):</label>
+            <label for="upcBarcode">UPC Barcode (scan barcode):</label>
             <input type="text" id="upcBarcode">
             <span id="upcBarcodeError" style="color: red;"></span>
         </div>
@@ -52,7 +52,7 @@
 
             // Check if upcBarcode has more than 12 digits
             if (upcBarcode.length !== 12) {
-                upcBarcodeError.textContent = "UPC Barcode should contain exactly 12 digits.";
+                upcBarcodeError.textContent = "UPC Barcode cannot be left blank and should contain exactly 12 digits.";
                 return;
             }
 
