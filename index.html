@@ -29,13 +29,28 @@
 
         function generateQRCode() {
             var upcBarcode = document.getElementById("upcBarcode").value;
-            var lotNumber = document.getElementById("lotNumber").value;
+            var lotNumber = document.getElementById("lotNumber").value.toUpperCase();
             var expirationDate = document.getElementById("expirationDate").value;
+          
+          var upcBarcodeError = document.getElementById("upcBarcodeError");
+            
+            // Check if upcBarcode is empty or contains non-numeric characters
+            if (upcBarcode.trim() === "" || !/^\d+$/.test(upcBarcode)) {
+                upcBarcodeError.textContent = "UPC Barcode should contain only numeric characters.";
+                return;
+            }
+            // Check if upcBarcode has more than 12 digits
+            if (upcBarcode.length > 12) {
+                upcBarcodeError.textContent = "UPC Barcode should not exceed 12 digits.";
+                return;
+            }
+            // Clear any previous error messages
+            upcBarcodeError.textContent = "";
 
             // Generate GS1 QR code with the input data
             var gs1QRCode = "0100" + upcBarcode +
                             "10" + lotNumber +
-                            "~17" + expirationDate;
+                            "~17" + expirationDate.replace(/-/g, '').slice(-6);
 
             // Removes existing QR code element when new QR is generated
             var qrcodeElement = document.getElementById("qrcode");
@@ -52,7 +67,7 @@
 
  
             var qrcodeText = document.getElementById("qrcodeText");
-            qrcodeText.innerText = "UPC Barcode: " + upcBarcode + "\nLot Number: " + lotNumber + "\nExpiration Date: " + expirationDate;
+            qrcodeText.innerText = "UPC Barcode: " + upcBarcode + "\nLot Number: " + lotNumber + "\nExpiration Date: " + expirationDate.replace(/-/g, '').slice(-6);
         }
     </script>
 </body>
