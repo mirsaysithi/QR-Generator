@@ -41,8 +41,8 @@
                 return;
             }
             // Check if upcBarcode has more than 12 digits
-            if (upcBarcode.length > 12) {
-                upcBarcodeError.textContent = "UPC Barcode should not exceed 12 digits.";
+            if (upcBarcode.length = 12) {
+                upcBarcodeError.textContent = "UPC Barcode should contain no more and no less than 12 digits.";
                 return;
             }
             // Clear any previous error messages
