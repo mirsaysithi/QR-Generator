@@ -14,10 +14,12 @@
         <div class="form-group">
             <label for="lotNumber">Lot Number:</label>
             <input type="text" id="lotNumber">
+            <span id="lotNumberError" style="color: red;"></span>
         </div>
         <div class="form-group">
             <label for="expirationDate">Expiration Date:</label>
             <input type="date" id="expirationDate">
+            <span id="expirationDateError" style="color: red;"></span>
         </div>
         <button class="btn" onclick="generateQRCode()">Generate QR Code</button>
         <div class="qrcode-img"><div id="qrcode"></div><span id="qrcodeText"></span>
@@ -34,20 +36,47 @@
             var expirationDate = document.getElementById("expirationDate").value;
 
             var upcBarcodeError = document.getElementById("upcBarcodeError");
-            
+            var lotNumberError = document.getElementById("lotNumberError");
+            var expirationDateError = document.getElementById("expirationDateError");
+
+            // Clear any previous error messages
+            upcBarcodeError.textContent = "";
+            lotNumberError.textContent = "";
+            expirationDateError.textContent = "";
+
             // Check if upcBarcode is empty or contains non-numeric characters
             if (upcBarcode.trim() === "" || !/^\d+$/.test(upcBarcode)) {
                 upcBarcodeError.textContent = "UPC Barcode should contain only numeric characters.";
                 return;
             }
+
             // Check if upcBarcode has more than 12 digits
             if (upcBarcode.length !== 12) {
                 upcBarcodeError.textContent = "UPC Barcode should contain exactly 12 digits.";
                 return;
             }
 
-            // Clear any previous error messages
-            upcBarcodeError.textContent = "";
+            // Check if lotNumber is empty
+            if (lotNumber.trim() === "") {
+                lotNumberError.textContent = "Lot Number cannot be left blank.";
+                return;
+            }
+
+            // Check if expirationDate is empty
+            if (expirationDate.trim() === "") {
+                expirationDateError.textContent = "Expiration Date cannot be left blank.";
+                return;
+            }
+
+            // Check if expirationDate is today or in the past
+            var currentDate = new Date().setHours(0, 0, 0, 0);
+            var selectedDate = new Date(expirationDate).setHours(0, 0, 0, 0);
+            if (selectedDate <= currentDate) {
+            expirationDateError.textContent = "Expiration date cannot be in the past. Please return product or re-enter expiration date.";
+            return;
+          
+            }
+
 
             // Generate GS1 QR code with the input data
             var gs1QRCode = "0100" + upcBarcode +
@@ -67,7 +96,6 @@
                 height: 128
             });
 
- 
             var qrcodeText = document.getElementById("qrcodeText");
             qrcodeText.innerText = "UPC Barcode: " + upcBarcode + "\nLot Number: " + lotNumber + "\nExpiration Date: " + expirationDate.replace(/-/g, '').slice(-6);
         }
