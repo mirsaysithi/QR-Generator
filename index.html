@@ -45,12 +45,7 @@
                 upcBarcodeError.textContent = "UPC Barcode should contain exactly 12 digits.";
                 return;
             }
-          }
-            // Check if upcBarcode has less than 12 digits
-            if (upcBarcode.length < 12) {
-                upcBarcodeError.textContent = "UPC Barcode should contain no less than 12 digits.";
-                return;
-            }
+
             // Clear any previous error messages
             upcBarcodeError.textContent = "";
 
