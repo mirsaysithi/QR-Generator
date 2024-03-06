@@ -9,6 +9,7 @@
         <div class="form-group">
             <label for="upcBarcode">UPC Barcode (scan barcode, numeric and up to 12 digits):</label>
             <input type="text" id="upcBarcode">
+            <span id="upcBarcodeError" style="color: red;"></span>
         </div>
         <div class="form-group">
             <label for="lotNumber">Lot Number (ALL CAPS ONLY):</label>
@@ -31,8 +32,8 @@
             var upcBarcode = document.getElementById("upcBarcode").value;
             var lotNumber = document.getElementById("lotNumber").value.toUpperCase();
             var expirationDate = document.getElementById("expirationDate").value;
-          
-          var upcBarcodeError = document.getElementById("upcBarcodeError");
+
+            var upcBarcodeError = document.getElementById("upcBarcodeError");
             
             // Check if upcBarcode is empty or contains non-numeric characters
             if (upcBarcode.trim() === "" || !/^\d+$/.test(upcBarcode)) {
