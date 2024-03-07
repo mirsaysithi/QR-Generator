@@ -44,6 +44,11 @@
             lotNumberError.textContent = "";
             expirationDateError.textContent = "";
 
+            // Check if upcBarcode has more than 12 digits
+            if (upcBarcode.trim() === "") {
+                upcBarcodeError.textContent = "UPC Barcode cannot be left blank.";
+                return;
+            }
             // Check if upcBarcode is empty or contains non-numeric characters
             if (upcBarcode.trim() === "" || !/^\d+$/.test(upcBarcode)) {
                 upcBarcodeError.textContent = "UPC Barcode should contain only numeric characters.";
@@ -53,12 +58,6 @@
             // Check if upcBarcode has more than 12 digits
             if (upcBarcode.length !== 12) {
                 upcBarcodeError.textContent = "UPC Barcode should contain exactly 12 digits.";
-                return;
-            }
-
-            // Check if upcBarcode has more than 12 digits
-            if (upcBarcode.trim() === "") {
-                upcBarcodeError.textContent = "UPC Barcode cannot be left blank.";
                 return;
             }
 
