@@ -69,8 +69,8 @@ function generateQRCode() {
     // Generate QR code using qrcode.js library
     qrcode = new QRCode(qrcodeElement, {
     text: gs1QRCode,
-    width: 300,
-    height: 300
+    width: 128,
+    height: 128
     });
 
     var qrcodeText = document.getElementById("qrcodeText");
