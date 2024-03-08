@@ -10,25 +10,35 @@
     <div class="container">
         <h2>LOT/EXP QR Code Generator</h2>
         <div class="form-group">
-            <label for="upcBarcode">UPC Barcode (scan barcode):</label><br>
+            <label for="upcBarcode">UPC Barcode (scan barcode):</label><br><br>
             <input type="text" id="upcBarcode" maxlength="12" pattern="[0-9]{12}"><br>
             <span id="upcBarcodeError" class="error" ></span>
         </div>
         <div class="form-group barcode">
-            <label for="lotNumber">Lot Number:</label><br>
+            <label for="lotNumber">Lot Number:</label><br><br>
             <input type="text" id="lotNumber"><br>
             <span id="lotNumberError" class="error" ></span>
         </div>
         <div class="form-group">
-            <label for="expirationDate">Expiration Date:</label><br>
-            <input type="date" id="expirationDate"><br>
+            <label for="expirationDate">Expiration Date:</label><br><br>
+            <input type="date" id="expirationDate"><br><br>
             <span id="expirationDateError" class="error" ></span>
         </div>
         <button class="btn" onclick="generateQRCode()">Generate QR Code</button>
         <div class="qrcode-img"><div id="qrcode"></div><span id="qrcodeText"></span>
         </div>
     </div>
-   
+   <div class="sop">
+        <h3>Instructions</h3>
+        <ol>
+            <li><p>Place cursor in UPC Barcode field and scan barcode. Ensure 
+                scanned barcode only contains exactly 12 digits and no alpha characters.</p></li>
+            <li><p>Enter lot number from product. Any alpha characters entered
+                 in lowercase letters will automatically convert to uppercase.</p></li>
+            <li><p>Select product’s expiration date from dropdown calendar.
+                 Expiration dates must be at least 2 days into the future.</p></li>
+        </ol>
+   </div>
 
 
 </body>
